@@ -17,6 +17,14 @@ if ($_POST) {
                 }
             register($_POST["username"], $_POST["password"]);
             break;
+
+        case "login":
+            if (!isset($_POST["username"]) || 
+                !isset($_POST["password"])) {
+                    http_response_code(400);
+                    die();
+                }
+            login($_POST["username"], $_POST["password"]);
     }    
 }
 ?>
