@@ -6,10 +6,12 @@ function save(string $token, string $title, string $content) {
 
     $token = $mysqli->real_escape_string($token);
     $title = $mysqli->real_escape_string($title);
+    $title_length = strlen($title);
     $content = $mysqli->real_escape_string($content);
 
     $row = @$mysqli->query("select username from users where token = '$token'")->fetch_assoc();
-    if ($row == null || strlen($title) == 0) {
+    if ($row == null || 
+        !($title_length  >= 1 && $title_length <= 255)) {
         http_response_code(400);
         die();
     }
