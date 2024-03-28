@@ -26,8 +26,11 @@ function register(string $username, string $password) {
     $mysqli = new mysqli("localhost", "root", "", "textpad_users");
     $password_hash =  password_hash($password, PASSWORD_BCRYPT);
 
-    if (!isset($mysqli->query("select username from users where username = '$username'")->fetch_all()[0]))
+    if (!isset($mysqli->query("select username from users where username = '$username'")->fetch_all()[0])) {
         $mysqli->query("insert into users values('$username', '$password_hash', null)");
+        $mysqli->query("use textpad_users_data");
+        $mysqli->query("create table $username(title longtext UNIQUE, content longtext)");
+    }
     else {
         http_response_code(403);
         die(); 
