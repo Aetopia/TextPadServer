@@ -65,7 +65,7 @@ function login(string $username, string $password) {
     $mysqli->commit();
     $mysqli->close();
 
-    echo json_encode(array("token" => $token)); 
+    echo $token; 
     http_response_code(200);
 }
 ?>
