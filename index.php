@@ -46,6 +46,14 @@ if ($_POST) {
             titles($_POST["token"]);
             break;
 
+        case "content":
+            if (!isset($_POST["token"]) ||
+                !isset($_POST["title"])) {
+                http_response_code(400);
+                die();
+            }
+            content($_POST["token"], $_POST["title"]);
+            break;
     }    
 }
 ?>

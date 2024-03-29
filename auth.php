@@ -24,7 +24,7 @@ function register(string $username, string $password) {
     check_username_password($username = trim($username), $password);
     
     $mysqli = new mysqli("localhost", "root", "", "textpad_users");
-    $password_hash =  password_hash($password, PASSWORD_BCRYPT);
+    $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
     if (!isset($mysqli->query("select username from users where username = '$username'")->fetch_all()[0])) {
         $mysqli->query("insert into users values('$username', '$password_hash', null)");
