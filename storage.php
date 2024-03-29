@@ -64,7 +64,7 @@ function content(string $token, string $title) {
         die();
     }
 
-    echo json_encode(array("content" => $row["content"]));
+    echo json_encode($row);
     $mysqli->close();
     http_response_code(200);
 }
